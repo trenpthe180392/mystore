@@ -1,0 +1,62 @@
+*{
+    padding: 0;
+  margin: 0; /* Đảm bảo không có margin */
+}
+.main-header {
+  width: 100%;
+  background-color: #ffffff; /* Hoặc màu bạn chọn */
+  padding: 10px 0;
+  margin: 0; /* Đảm bảo không có margin */
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Thay vì dùng max-width: 1200px */
+  padding: 0 5%; /* Tạo khoảng cách nhỏ ở 2 đầu cho đẹp thay vì sát mép */
+  margin: 0; 
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.logo span { color: #ff4757; }
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar a:hover { color: #ff4757; }
+
+.header-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.cart-icon { position: relative; cursor: pointer; }
+
+.cart-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
