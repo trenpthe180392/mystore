@@ -53,6 +53,8 @@ public class Books {
             inverseJoinColumns = @JoinColumn(name = "author_id")
     )
     private Set<Authors> authors = new HashSet<>();
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private Set<CartItems> items = new HashSet<>();
     public Books() {
     }
 

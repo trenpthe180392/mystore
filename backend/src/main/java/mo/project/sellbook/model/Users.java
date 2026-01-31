@@ -40,6 +40,8 @@ public class Users {
     private List<Orders> orders = new ArrayList<>();
     public Users() {
     }
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Carts cart;
 
     public Users(Integer id, String userName, String number, String address, String email, String passwordHash, UserRole role, UserGender gender, String avatarUrl, String socialAccount, Boolean isActive) {
         this.id = id;
