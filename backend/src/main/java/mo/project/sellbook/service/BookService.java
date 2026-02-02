@@ -1,5 +1,6 @@
 package mo.project.sellbook.service;
 
+import mo.project.sellbook.dto.BookDetailDTO;
 import mo.project.sellbook.dto.BookHomeDTO;
 import mo.project.sellbook.mapper.BookMapper;
 import mo.project.sellbook.model.Books;
@@ -54,5 +55,14 @@ public class BookService {
     public Books updateBook(Books book) {
         // save() của JPA tự hiểu là Update nếu object đã có ID tồn tại
         return bookRepo.save(book);
+    }
+    @Transactional(readOnly = true)
+    public BookDetailDTO getBookDetail(int id) {
+        // 1. Tìm Entity trong Database
+        Books book = bookRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+
+        // 2. Chuyển đổi Entity sang DTO dùng Mapper
+        return bookMapper.toDetailDTO(book);
     }
 }

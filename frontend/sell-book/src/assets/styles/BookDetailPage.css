@@ -1,0 +1,137 @@
+/* BookDetailPage.css */
+.book-detail-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.book-main-section {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.book-image-column {
+    flex: 1;
+    min-width: 300px;
+}
+
+.book-image {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.book-info-column {
+    flex: 2;
+    min-width: 300px;
+}
+
+.book-title {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.book-author {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.price-box {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.sale-price {
+    font-size: 1.8rem;
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.base-price {
+    margin-left: 15px;
+    text-decoration: line-through;
+    color: #999;
+}
+
+.cart-controls {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.quantity-btn {
+    padding: 10px 15px;
+    border: none;
+    background: #eee;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.quantity-input {
+    width: 45px;
+    text-align: center;
+    border: none;
+    font-size: 1rem;
+}
+
+.add-to-cart-btn {
+    padding: 12px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.add-to-cart-btn:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.add-to-cart-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.spec-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.spec-label {
+    color: #777;
+    width: 40%;
+}
+
+.description-section {
+    margin-top: 40px;
+    line-height: 1.8;
+    color: #444;
+}

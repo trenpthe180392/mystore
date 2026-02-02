@@ -10,6 +10,9 @@ public class BookHomeDTO {
     private String authorName;   // Lấy từ tập hợp Authors
     private String imageUrl;     // Lấy từ BookImages Entity
 
+    public BookHomeDTO() {
+    }
+
     public BookHomeDTO(int id, String title, String slug, double salePrice, double basePrice, String categoryName, String authorName, String imageUrl) {
         this.id = id;
         this.title = title;

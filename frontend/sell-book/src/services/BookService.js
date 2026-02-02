@@ -9,3 +9,13 @@ export const getHomeBooks = async ()=>{
         return [];
     }
 };
+
+export const getBookById = async (id)=>{
+    try {
+        const res =await axios.get(`${API_URL}/${id}`)
+        return res.data;
+    } catch (error) {
+        console.error("Can not fetch data: ", error);
+        return [];
+    }
+}
