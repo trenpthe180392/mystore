@@ -16,6 +16,6 @@ export const getBookById = async (id)=>{
         return res.data;
     } catch (error) {
         console.error("Can not fetch data: ", error);
-        return [];
+        return null;
     }
 }

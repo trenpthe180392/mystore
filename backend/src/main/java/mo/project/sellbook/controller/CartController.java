@@ -1,6 +1,6 @@
 package mo.project.sellbook.controller;
 
-import mo.project.sellbook.dto.CreateCartRequestDTO;
+import mo.project.sellbook.dto.request.CreateCartRequestDTO;
 import mo.project.sellbook.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

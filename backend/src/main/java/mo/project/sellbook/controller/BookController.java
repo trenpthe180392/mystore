@@ -1,7 +1,7 @@
 package mo.project.sellbook.controller;
 
-import mo.project.sellbook.dto.BookDetailDTO;
-import mo.project.sellbook.dto.BookHomeDTO;
+import mo.project.sellbook.dto.response.BookDetailDTO;
+import mo.project.sellbook.dto.response.BookHomeDTO;
 import mo.project.sellbook.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,13 @@ public class BookController {
     @GetMapping("/{id}")
     public ResponseEntity<BookDetailDTO> getBookDetail(@PathVariable int id) {
         BookDetailDTO detail = bookService.getBookDetail(id);
+
+        if (detail == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(detail);
     }
+
 
 }

@@ -2,7 +2,7 @@ package mo.project.sellbook.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import mo.project.sellbook.dto.CreateCartRequestDTO;
+import mo.project.sellbook.dto.request.CreateCartRequestDTO;
 import mo.project.sellbook.model.CartItems; // Đảm bảo import đúng Entity
 
 @Mapper(componentModel = "spring")

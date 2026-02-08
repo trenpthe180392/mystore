@@ -1,4 +1,4 @@
-package mo.project.sellbook.dto;
+package mo.project.sellbook.dto.response;
 
 public class BookHomeDTO {
     private int id;

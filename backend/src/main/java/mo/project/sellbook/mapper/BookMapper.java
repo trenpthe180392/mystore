@@ -1,7 +1,7 @@
 package mo.project.sellbook.mapper;
 
-import mo.project.sellbook.dto.BookDetailDTO;
-import mo.project.sellbook.dto.BookHomeDTO;
+import mo.project.sellbook.dto.response.BookDetailDTO;
+import mo.project.sellbook.dto.response.BookHomeDTO;
 import mo.project.sellbook.model.Books;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

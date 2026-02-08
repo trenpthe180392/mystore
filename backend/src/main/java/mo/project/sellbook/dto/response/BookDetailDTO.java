@@ -1,4 +1,4 @@
-package mo.project.sellbook.dto;
+package mo.project.sellbook.dto.response;
 
 import java.time.LocalDate;
 import java.util.List;

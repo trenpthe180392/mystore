@@ -1,4 +1,4 @@
-package mo.project.sellbook.dto;
+package mo.project.sellbook.dto.request;
 
 public class CreateCartRequestDTO {
     private Integer productId;
