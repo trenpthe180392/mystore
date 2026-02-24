@@ -1,18 +1,18 @@
 package mo.project.sellbook.configuration;
 
-import lombok.RequiredArgsConstructor;
+import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import mo.project.sellbook.service.UserDetailServiceCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,53 +25,73 @@ import org.springframework.security.web.SecurityFilterChain;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.oauth2.jwt.*;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+    private static final String[] WHILE_LIST = {
+            "/auth/login",
+            "/api/users/create",
+            "/api/books/home",
+            "/api/books/*"
+    };
+    private final UserDetailServiceCustomizer userDetailsService;
 
-    private final UserDetailServiceCustomizer userDetailService;
-
-    public SecurityConfiguration(UserDetailServiceCustomizer userDetailService) {
-        this.userDetailService = userDetailService;
+    public SecurityConfiguration(UserDetailServiceCustomizer userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
-    // ================= PASSWORD ENCODER =================
+    @Bean
+    public AuthenticationManager authenticationManager(PasswordEncoder passwordEncoder) {
+
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder);
+
+        return new ProviderManager(provider);
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    // ================= AUTH PROVIDER =================
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-
-        provider.setUserDetailsService(userDetailService);
-        provider.setPasswordEncoder(passwordEncoder());
-
-        return provider;
-    }
-
-    // ================= AUTH MANAGER =================
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http,
+                                           AuthenticationManager authenticationManager) throws Exception {
 
-        http.csrf(csrf -> csrf.disable());
-
-        http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/login").permitAll()
-                .requestMatchers("/api/users/create").permitAll()
-                .requestMatchers("/api/books/home").permitAll()
-                .anyRequest().authenticated()
-        );
+        http
+                .csrf(csrf -> csrf.disable())
+                .authenticationManager(authenticationManager)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(WHILE_LIST).permitAll()
+                        .anyRequest().authenticated()
+                );
 
         return http.build();
     }
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
+    @Bean
+    public JwtEncoder jwtEncoder() {
+        SecretKey key = new SecretKeySpec(
+                jwtSecret.getBytes(StandardCharsets.UTF_8),
+                "HmacSHA256"
+        );
+        return new NimbusJwtEncoder(new ImmutableSecret<>(key));
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        SecretKey key = new SecretKeySpec(
+                jwtSecret.getBytes(StandardCharsets.UTF_8),
+                "HmacSHA256"
+        );
+        return NimbusJwtDecoder.withSecretKey(key).build();
+    }
+
 
 }
