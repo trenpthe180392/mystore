@@ -1,21 +1,27 @@
-*{
-    padding: 0;
-  margin: 0; /* Đảm bảo không có margin */
+* {
+  padding: 0;
+  margin: 0;
+  /* Đảm bảo không có margin */
 }
+
 .main-header {
   width: 100%;
-  background-color: #ffffff; /* Hoặc màu bạn chọn */
+  background-color: #ffffff;
+  /* Hoặc màu bạn chọn */
   padding: 10px 0;
-  margin: 0; /* Đảm bảo không có margin */
+  margin: 0;
+  /* Đảm bảo không có margin */
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%; /* Thay vì dùng max-width: 1200px */
-  padding: 0 5%; /* Tạo khoảng cách nhỏ ở 2 đầu cho đẹp thay vì sát mép */
-  margin: 0; 
+
+  max-width: 1200px;
+  margin: 0 auto;
+
+  padding: 0 20px;
 }
 
 .logo a {
@@ -25,7 +31,9 @@
   color: #333;
 }
 
-.logo span { color: #ff4757; }
+.logo span {
+  color: #ff4757;
+}
 
 .navbar ul {
   display: flex;
@@ -33,14 +41,23 @@
   gap: 25px;
 }
 
-.navbar a {
+.navbar a,
+.navbar button {
   text-decoration: none;
   color: #555;
   font-weight: 500;
   transition: color 0.3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
 }
 
-.navbar a:hover { color: #ff4757; }
+.navbar a:hover,
+.navbar button:hover {
+  color: #ff4757;
+}
 
 .header-actions {
   display: flex;
@@ -48,7 +65,10 @@
   align-items: center;
 }
 
-.cart-icon { position: relative; cursor: pointer; }
+.cart-icon {
+  position: relative;
+  cursor: pointer;
+}
 
 .cart-count {
   position: absolute;

@@ -15,6 +15,7 @@ public class CartService {
     @Autowired private CartRepository cartRepository;
     @Autowired private UserRepository userRepository;
     @Autowired private BookRepository bookRepository;
+    @Autowired private CartItemsRepository cartItemsRepository;
 
     @Transactional
     public void addToCart(int userId, CreateCartRequestDTO dto) {
@@ -61,5 +62,8 @@ public class CartService {
         // 4. Lưu lại (Lưu Carts sẽ tự động lưu CartItems và cập nhật Books nhờ Transaction)
         cart.setUpdatedAt(LocalDate.now());
         cartRepository.save(cart);
+    }
+    public int getCartCount(Integer userId) {
+        return cartItemsRepository.countProductsByUserId(userId);
     }
 }

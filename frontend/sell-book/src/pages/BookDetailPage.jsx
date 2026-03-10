@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBookById } from '../services/BookService';
-import { addToCart } from '../services/CartService'; 
+import { addToCart, getCartCount } from '../services/CartService';
 import '../assets/styles/BookDetailPage.css';
+import { useNavigate } from "react-router-dom";
 
 const BookDetailPage = () => {
     const { id } = useParams();
     const [book, setBook] = useState(null);
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
+    const isLoggedIn = !!localStorage.getItem("accessToken");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDetail = async () => {
@@ -26,16 +29,40 @@ const BookDetailPage = () => {
     }, [id]);
 
     const handleAddToCart = async () => {
+
+        const token = localStorage.getItem("accessToken");
+
+        if (!token) {
+            alert("Vui lòng đăng nhập để thêm vào giỏ hàng!");
+            navigate("/login");
+            return;
+        }
+
         try {
+
             const message = await addToCart(book.id, quantity);
+
             alert(message);
-            setBook({ ...book, stockQuantity: book.stockQuantity - quantity });
+
+            // cập nhật lại số lượng cart
+            const newCount = await getCartCount();
+
+            window.dispatchEvent(
+                new CustomEvent("cartUpdated", { detail: newCount })
+            );
+
+            // cập nhật stock hiển thị
+            setBook({
+                ...book,
+                stockQuantity: book.stockQuantity - quantity
+            });
+
             setQuantity(1);
+
         } catch (error) {
             alert(error);
         }
     };
-
     if (loading) return <div className="loading">Đang tải dữ liệu...</div>;
     if (!book) return <div className="error">Không tìm thấy sách!</div>;
 
@@ -44,9 +71,9 @@ const BookDetailPage = () => {
             <div className="book-main-section">
                 {/* Ảnh sách */}
                 <div className="book-image-column">
-                    <img 
-                        src={book.imageUrl || 'https://via.placeholder.com/300x450'} 
-                        alt={book.title} 
+                    <img
+                        src={book.imageUrl || 'https://via.placeholder.com/300x450'}
+                        alt={book.title}
                         className="book-image"
                     />
                 </div>
@@ -71,19 +98,19 @@ const BookDetailPage = () => {
 
                     <div className="cart-controls">
                         <div className="quantity-selector">
-                            <button 
+                            <button
                                 className="quantity-btn"
                                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
                             >-</button>
                             <input className="quantity-input" type="text" value={quantity} readOnly />
-                            <button 
+                            <button
                                 className="quantity-btn"
                                 onClick={() => setQuantity(Math.min(book.stockQuantity, quantity + 1))}
                                 disabled={quantity >= book.stockQuantity}
                             >+</button>
                         </div>
 
-                        <button 
+                        <button
                             className="add-to-cart-btn"
                             onClick={handleAddToCart}
                             disabled={book.stockQuantity <= 0}

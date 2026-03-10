@@ -5,17 +5,17 @@ import mo.project.sellbook.dto.request.LoginRequest;
 import mo.project.sellbook.dto.response.LoginResponse;
 import mo.project.sellbook.dto.response.RegisterResponse;
 import mo.project.sellbook.service.AuthenticationService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/api/auth")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
-    @PostMapping("/auth/login")
+    @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         return authenticationService.login(loginRequest);
     }

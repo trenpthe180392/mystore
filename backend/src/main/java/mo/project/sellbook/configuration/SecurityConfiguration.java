@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 public class SecurityConfiguration {
 
     private static final String[] WHILE_LIST = {
-            "/auth/login",
+            "/api/auth/login",
             "/api/users/create",
             "/api/books/home",
             "/api/books/*",

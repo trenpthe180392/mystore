@@ -4,7 +4,7 @@ import InputField from '../components/InputField';
 import '../assets/styles/login.css';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
@@ -13,10 +13,15 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const data = await authService.login(email, password);
+      const data = await authService.login(username, password);
       // Lưu token vào LocalStorage hoặc Context
-      localStorage.setItem('token', data.token);
-      window.location.href = '/dashboard'; 
+      // Xóa key cũ
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      window.location.href = '/';
     } catch (err) {
       setError(err.message);
     }
@@ -27,20 +32,20 @@ const LoginPage = () => {
       <form className="login-form" onSubmit={handleLogin}>
         <h2>Đăng Nhập SellBook</h2>
         {error && <p className="error-msg">{error}</p>}
-        
-        <InputField 
-          label="Email" 
-          type="email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          placeholder="Nhập email của bạn..."
+
+        <InputField
+          label="UserName"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Nhập tên tài khoản của bạn..."
         />
-        
-        <InputField 
-          label="Mật khẩu" 
-          type="password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
+
+        <InputField
+          label="Mật khẩu"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="********"
         />
 

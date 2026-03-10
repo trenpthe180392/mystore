@@ -36,4 +36,13 @@ public class CartController {
 
         return ResponseEntity.ok("Thêm vào giỏ hàng thành công!");
     }
+    @GetMapping("/count")
+    public ResponseEntity<Integer> getCartCount(@AuthenticationPrincipal Jwt jwt) {
+
+        Integer userId = Integer.parseInt(jwt.getClaim("id").toString());
+
+        int count = cartService.getCartCount(userId);
+
+        return ResponseEntity.ok(count);
+    }
 }
