@@ -2,11 +2,13 @@ package mo.project.sellbook.controller;
 
 import mo.project.sellbook.dto.response.BookDetailDTO;
 import mo.project.sellbook.dto.response.BookHomeDTO;
+import mo.project.sellbook.model.Books;
 import mo.project.sellbook.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
@@ -31,6 +33,10 @@ public class BookController {
         }
 
         return ResponseEntity.ok(detail);
+    }
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<BookHomeDTO>> getByCategory(@PathVariable Integer id) {
+        return ResponseEntity.ok(bookService.getBooksByCategoryId(id));
     }
 
 

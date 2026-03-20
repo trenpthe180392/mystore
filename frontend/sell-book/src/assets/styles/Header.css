@@ -80,3 +80,73 @@
   padding: 2px 6px;
   font-size: 12px;
 }
+.search-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--primary-color);
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* --- PHẦN DROPDOWN BỔ SUNG --- */
+
+/* 1. Định vị thẻ li chứa dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* 2. Nút bấm/chữ "Thể loại" */
+.dropbtn {
+  cursor: pointer;
+  padding-bottom: 5px; /* Tạo không gian để hover không bị mất */
+}
+
+/* 3. Khung chứa các link con */
+.dropdown-content {
+  display: none;         /* Mặc định ẩn */
+  position: absolute;    /* Nằm đè lên các phần tử khác */
+  background-color: #ffffff;
+  min-width: 180px;      /* Độ rộng menu con */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho sang */
+  z-index: 100;          /* Đảm bảo luôn nằm trên cùng */
+  border-radius: 4px;    /* Bo góc nhẹ */
+  margin-top: 10px;      /* Cách nút bấm một chút */
+  border: 1px solid #eee;
+}
+
+/* 4. Các đường link bên trong dropdown */
+.dropdown-content a {
+  color: #555 !important;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;        /* Mỗi link nằm 1 dòng */
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+/* 5. Hover vào link con */
+.dropdown-content a:hover {
+  background-color: #f9f9f9;
+  color: #ff4757 !important;
+}
+
+/* 6. QUAN TRỌNG: Hiển thị khi hover vào thẻ cha .dropdown */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Tạo một "cầu nối" để chuột di chuyển từ nút xuống menu không bị mất hover */
+.dropdown-content::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+}

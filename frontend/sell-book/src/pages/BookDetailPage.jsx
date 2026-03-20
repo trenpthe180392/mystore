@@ -33,7 +33,6 @@ const BookDetailPage = () => {
         const token = localStorage.getItem("accessToken");
 
         if (!token) {
-            alert("Vui lòng đăng nhập để thêm vào giỏ hàng!");
             navigate("/login");
             return;
         }
@@ -50,12 +49,6 @@ const BookDetailPage = () => {
             window.dispatchEvent(
                 new CustomEvent("cartUpdated", { detail: newCount })
             );
-
-            // cập nhật stock hiển thị
-            setBook({
-                ...book,
-                stockQuantity: book.stockQuantity - quantity
-            });
 
             setQuantity(1);
 

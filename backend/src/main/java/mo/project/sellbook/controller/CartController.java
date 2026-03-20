@@ -1,6 +1,7 @@
 package mo.project.sellbook.controller;
 
 import mo.project.sellbook.dto.request.CreateCartRequestDTO;
+import mo.project.sellbook.dto.request.UpdateCartItemRequestDTO;
 import mo.project.sellbook.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +45,23 @@ public class CartController {
         int count = cartService.getCartCount(userId);
 
         return ResponseEntity.ok(count);
+    }
+    @GetMapping
+    public ResponseEntity<?> viewCart(@AuthenticationPrincipal Jwt jwt) {
+
+        Integer userId = Integer.parseInt(jwt.getClaim("id").toString());
+
+        return ResponseEntity.ok(cartService.viewCart(userId));
+    }
+    @PutMapping("/update")
+    public ResponseEntity<?> updateCartItem(
+            @AuthenticationPrincipal Jwt jwt,
+            @RequestBody UpdateCartItemRequestDTO dto) {
+
+        Integer userId = Integer.parseInt(jwt.getClaim("id").toString());
+
+        cartService.updateQuantity(userId, dto);
+
+        return ResponseEntity.ok("Cart updated");
     }
 }

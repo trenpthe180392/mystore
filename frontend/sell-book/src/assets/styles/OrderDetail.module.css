@@ -1,0 +1,147 @@
+/* Container chính */
+.detailContainer {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header và Badge trạng thái */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.statusBadge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* Các màu trạng thái dựa trên enum của bạn */
+.PENDING { background-color: #fff3cd; color: #856404; }
+.CONFIRMED { background-color: #cce5ff; color: #004085; }
+.PACKED { background-color: #d1ecf1; color: #0c5460; }
+.DELIVERED { background-color: #d4edda; color: #155724; }
+.COMPLETED { background-color: #d4edda; color: #155724; }
+
+/* Grid thông tin chung */
+.infoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.infoBlock {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.infoBlock h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #007bff;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 8px;
+}
+
+.infoBlock p {
+    margin: 8px 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Danh sách sản phẩm */
+.productsTable h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.productRow {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    gap: 20px;
+}
+
+.productRow img {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.productInfo {
+    flex: 1;
+}
+
+.productInfo h5 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #222;
+}
+
+.productInfo p {
+    margin: 0;
+    color: #777;
+}
+
+.productPrice {
+    font-weight: 700;
+    color: #d9534f;
+    font-size: 1.1rem;
+}
+
+/* Phần tổng tiền */
+.totalSection {
+    margin-top: 30px;
+    text-align: right;
+    padding-top: 20px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.totalSection h3 {
+    color: #d9534f;
+    font-size: 1.5rem;
+}
+
+.emptyMsg, .status {
+    text-align: center;
+    padding: 50px;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .infoGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

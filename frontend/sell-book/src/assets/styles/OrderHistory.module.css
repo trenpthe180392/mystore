@@ -1,0 +1,160 @@
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.loading {
+    text-align: center;
+    padding: 50px;
+    font-size: 18px;
+    color: #666;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 60px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.emptyState button {
+    background-color: #ffd814;
+    border: 1px solid #fcd200;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.orderCard {
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.orderHeader {
+    background-color: #f0f2f2;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d5d9d9;
+    font-size: 12px;
+}
+
+.headerLeft {
+    display: flex;
+    gap: 40px;
+}
+
+.label {
+    color: #565959;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+}
+
+.value, .totalValue {
+    color: #111;
+    font-weight: 500;
+}
+
+.totalValue {
+    color: #b12704;
+    font-weight: bold;
+}
+
+.headerRight {
+    text-align: right;
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 11px;
+    margin-top: 5px;
+    background: #e7f4ff;
+    color: #007185;
+}
+
+/* Dynamic Status Colors */
+.status_PENDING { background: #fff3cd; color: #856404; }
+.status_COMPLETED { background: #d4edda; color: #155724; }
+.status_DELIVERED { background: #cce5ff; color: #004085; }
+
+.orderBody {
+    padding: 20px;
+}
+
+.itemRow {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.itemRow:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.bookImage {
+    width: 90px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.itemInfo {
+    flex: 1;
+}
+
+.itemInfo h4 {
+    margin: 0 0 8px 0;
+    color: #007185;
+    font-size: 16px;
+}
+
+.itemInfo p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #565959;
+}
+
+.price {
+    font-weight: bold;
+    color: #111;
+}
+
+.itemActions {
+    display: flex;
+    align-items: center;
+}
+
+.buyAgainBtn {
+    background-color: #ffd814;
+    border: 1px solid #fcd200;
+    border-radius: 8px;
+    padding: 7px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.buyAgainBtn:hover {
+    background-color: #f7ca00;
+}

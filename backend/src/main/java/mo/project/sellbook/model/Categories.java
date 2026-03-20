@@ -3,6 +3,7 @@ package mo.project.sellbook.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
@@ -23,6 +24,7 @@ public class Categories {
     @OneToMany(
             mappedBy = "category"
     )
+    @JsonIgnore
     private List<Books> books;
 
     public Categories() {

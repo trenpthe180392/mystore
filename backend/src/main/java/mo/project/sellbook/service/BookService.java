@@ -65,4 +65,12 @@ public class BookService {
         // 2. Chuyển đổi Entity sang DTO dùng Mapper
         return bookMapper.toDetailDTO(book);
     }
+    @Transactional(readOnly = true)
+    public List<BookHomeDTO> getBooksByCategoryId(Integer categoryId) {
+        // 1. Gọi Repository để lấy list Entity
+        List<Books> books = bookRepo.findByCategoryId(categoryId);
+
+        // 2. Dùng Mapper chuyển sang DTO
+        return bookMapper.toHomeDTOList(books);
+    }
 }

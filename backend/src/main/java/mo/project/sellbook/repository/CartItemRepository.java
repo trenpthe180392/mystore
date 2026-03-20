@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface CartItemsRepository extends JpaRepository<CartItems, Integer> {
+import java.util.List;
+
+public interface CartItemRepository extends JpaRepository<CartItems, Integer> {
 
     @Query("""
         SELECT COUNT(ci.id)
@@ -13,4 +15,6 @@ public interface CartItemsRepository extends JpaRepository<CartItems, Integer> {
         WHERE ci.cart.user.id = :userId
     """)
     int countProductsByUserId(@Param("userId") Integer userId);
+
+    List<CartItems> findAllByIdIn(List<Integer> ids);
 }

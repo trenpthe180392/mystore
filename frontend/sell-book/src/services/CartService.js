@@ -29,6 +29,21 @@ export const addToCart = async (productId, quantity) => {
     }
 };
 export const getCartCount = async () => {
-  const response = await axiosInstance.get("/api/cart/count");
-  return response.data;
+    const response = await axiosInstance.get("/api/cart/count");
+    return response.data;
+};
+// VIEW CART
+export const getCart = async () => {
+    const response = await axiosInstance.get("/api/cart");
+    return response.data;
+};
+//UPDATE QUANTITY
+export const updateCartItem = async (cartItemId, quantity) => {
+
+    const response = await axiosInstance.put("/api/cart/update", {
+        cartItemId: cartItemId,
+        quantity: quantity
+    });
+
+    return response.data;
 };

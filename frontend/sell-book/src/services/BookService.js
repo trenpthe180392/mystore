@@ -19,3 +19,12 @@ export const getBookById = async (id) => {
     return null;
   }
 };
+export const getBooksByCategory = async (categoryId) => {
+  try {
+    const res = await axiosInstance.get(`/api/books/category/${categoryId}`);
+    return res.data;
+  } catch (error) {
+    console.error(`Can not fetch books for category ${categoryId}:`, error);
+    return [];
+  }
+};
