@@ -24,7 +24,7 @@ public class SecurityConfiguration {
             "/api/users/create",
             "/api/books/home",
             "/api/books/**",
-            "/api/categories/**"
+            "/api/categories/**",
     };
 
     private final UserDetailServiceCustomizer userDetailsService;

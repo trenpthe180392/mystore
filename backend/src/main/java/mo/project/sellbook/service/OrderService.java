@@ -32,7 +32,9 @@ public class OrderService {
         List<CartItems> cartItems = cartItemRepository.findAllById(request.getCartItemIds());
 
         Orders order = new Orders();
-        // ... gán các thông tin address, phone, paymentMethod ...
+        order.setShippingAddress(request.getShippingAddress());
+        order.setPhoneNumber(request.getPhoneNumber());
+        order.setPaymentMethod(request.getPaymentMethod());
         order.setUser(user);
         order.setStatus(OrderStatus.PENDING);
         order.setCreatedAt(LocalDateTime.now());

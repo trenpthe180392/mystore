@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import CartPage from "./pages/CartPage";
@@ -30,6 +31,7 @@ function App() {
 
           </Routes>
         </main>
+        <Footer/>
       </div>
     </Router>
   );

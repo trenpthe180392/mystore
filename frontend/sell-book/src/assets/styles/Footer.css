@@ -1,0 +1,144 @@
+.main-footer {
+  background-color: #ffffff;
+  padding: 60px 0 20px 0;
+  border-top: 1px solid #eee;
+  color: #555;
+  margin-top: 50px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-section h3 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Gạch chân dưới tiêu đề cột */
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 30px;
+  height: 2px;
+  background-color: #ff4757;
+}
+
+.footer-section p {
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+/* Style cho danh sách liên kết */
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #ff4757;
+  padding-left: 5px;
+}
+
+/* Social links */
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-links a {
+  width: 35px;
+  height: 35px;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  background: #ff4757;
+  color: #fff;
+}
+
+/* Newsletter */
+.newsletter {
+  display: flex;
+  margin-top: 15px;
+}
+
+.newsletter input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  flex: 1;
+}
+
+.newsletter button {
+  padding: 10px 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.newsletter button:hover {
+  background-color: #ff4757;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .footer-section {
+    text-align: center;
+  }
+
+  .footer-section h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}
