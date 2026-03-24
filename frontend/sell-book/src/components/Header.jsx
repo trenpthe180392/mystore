@@ -2,13 +2,16 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getCartCount } from '../services/CartService';
 import { getAllCategories } from '../services/CategoryService';
+import { useLocation } from "react-router-dom";
 import "../assets/styles/Header.css";
 
 const Header = () => {
+  const location = useLocation();
   const [cartCount, setCartCount] = useState(0);
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
-  
+  const isActive = (path) => location.pathname === path;
+
   // Dùng useState để giữ trạng thái login ổn định qua các lần render
   const [isLogin, setIsLogin] = useState(!!localStorage.getItem("accessToken"));
 
@@ -43,16 +46,28 @@ const Header = () => {
       console.error("Lỗi cập nhật giỏ hàng:", error);
     }
   }, [isLogin]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      // encodeURIComponent giúp mã hóa các khoảng trắng hoặc ký tự đặc biệt
+      navigate(`/?search=${encodeURIComponent(searchTerm.trim())}&page=1`);
+    } else {
+      // Nếu người dùng xóa trắng ô tìm kiếm và ấn Enter -> Hiển thị tất cả sách
+      navigate(`/`);
+    }
+  };
 
   // 3. Theo dõi giỏ hàng và sự kiện Login/Logout
   useEffect(() => {
     updateCart();
 
     const handleCartUpdate = () => updateCart();
-    
+
     // Lắng nghe sự kiện custom khi thêm vào giỏ hàng thành công
     window.addEventListener("cartUpdated", handleCartUpdate);
-    
+
     return () => {
       window.removeEventListener("cartUpdated", handleCartUpdate);
     };
@@ -88,15 +103,33 @@ const Header = () => {
 
         <nav className="navbar">
           <ul>
-            <li><Link to="/">Trang chủ</Link></li>
-            <li><Link to="/books">Sách</Link></li>
+            {/* Trang chủ: Chỉ active khi đường dẫn là '/' và không có query tìm kiếm */}
+            <li>
+              <Link to="/" className={isActive("/") && !location.search ? "active" : ""}>
+                Trang chủ
+              </Link>
+            </li>
 
+            {/* Tác giả: Active khi đường dẫn là /authors */}
+            <li>
+              <Link to="/authors" className={isActive("/authors") ? "active" : ""}>
+                Tác giả
+              </Link>
+            </li>
+
+            {/* Dropdown Thể loại: Tự động đổi màu xanh nếu URL chứa categoryId */}
             <li className="dropdown">
-              <span className="dropbtn">Thể loại ▾</span>
+              <span className={`dropbtn ${location.search.includes("categoryId") ? "active" : ""}`}>
+                Thể loại <i className="arrow-down">▾</i>
+              </span>
               <div className="dropdown-content">
                 {categories.length > 0 ? (
                   categories.map((cat) => (
-                    <Link key={cat.id} to={`/?categoryId=${cat.id}`}>
+                    <Link
+                      key={cat.id}
+                      to={`/?categoryId=${cat.id}`}
+                      className={location.search.includes(`categoryId=${cat.id}`) ? "active" : ""}
+                    >
                       {cat.name}
                     </Link>
                   ))
@@ -106,26 +139,46 @@ const Header = () => {
               </div>
             </li>
 
-            <li><Link to="/contact">Liên hệ</Link></li>
+            {/* Liên hệ */}
+            <li>
+              <Link to="/contact" className={isActive("/contact") ? "active" : ""}>
+                Liên hệ
+              </Link>
+            </li>
 
+            {/* Auth links: Gom nhóm logic login/logout */}
             <li className="auth-links">
               {isLogin ? (
-                <>
-                  <Link to="/orders">Đơn hàng</Link>
-                  <button onClick={handleLogout} className="logout-btn">Đăng xuất</button>
-                </>
+                <div className="user-nav">
+                  <Link to="/orders" className={isActive("/orders") ? "active" : ""}>
+                    Đơn hàng
+                  </Link>
+                  <button onClick={handleLogout} className="logout-btn">
+                    Đăng xuất
+                  </button>
+                </div>
               ) : (
-                <Link to="/login">Đăng nhập</Link>
+                <Link to="/login" className={isActive("/login") ? "active" : ""}>
+                  Đăng nhập
+                </Link>
               )}
             </li>
           </ul>
         </nav>
 
         <div className="header-actions">
-          <button className="search-btn" title="Tìm kiếm">🔍</button>
+          <form onSubmit={handleSearch} className="search-form">
+            <input
+              type="text"
+              placeholder="Tìm tên sách..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button type="submit" className="search-btn">🔍</button>
+          </form>
           <div className="cart-icon">
-            <Link 
-              to="/cart" 
+            <Link
+              to="/cart"
               onClick={(e) => {
                 if (!isLogin) {
                   e.preventDefault();

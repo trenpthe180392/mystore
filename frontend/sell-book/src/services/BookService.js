@@ -28,3 +28,12 @@ export const getBooksByCategory = async (categoryId) => {
     return [];
   }
 };
+export const getBooksByAuthor = async (authorId) => {
+    try {
+        const res = await axiosInstance.get(`/api/books/author/${authorId}`);
+        return res.data;
+    } catch (error) {
+        console.error(`Lỗi tải sách của tác giả ${authorId}:`, error);
+        return [];
+    }
+};

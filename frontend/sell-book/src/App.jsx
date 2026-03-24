@@ -9,6 +9,8 @@ import CheckoutPage from './pages/CheckoutPage';
 import BookDetailPage from './pages/BookDetailPage';
 import OrderHistory from './pages/OrderHistory';
 import OrderDetail from './pages/OrderDetail';
+import AuthorList from './pages/AuthorList';
+import Contact from "./pages/Contact";
 import './App.css';
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/orders" element={<OrderHistory />} />
             <Route path="/orders/:orderId" element={<OrderDetail />} />
+            <Route path="/authors" element={<AuthorList />} />
+            <Route path="/contact" element={<Contact />} />
 
           </Routes>
         </main>

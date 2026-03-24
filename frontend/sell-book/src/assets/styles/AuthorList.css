@@ -1,0 +1,126 @@
+/* Bao quát toàn bộ trang */
+.author-page-wrapper {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+/* 1. Header: Căn giữa và tạo khoảng cách với phần card bên dưới */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px; /* Tạo khoảng cách lớn để tách biệt với hàng card */
+}
+
+.section-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.title-underline {
+    width: 50px;
+    height: 4px;
+    background-color: #f39c12; /* Màu vàng cam giống ảnh mẫu */
+    margin: 0 auto 20px;
+}
+
+.results-count {
+    color: #888;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+/* 2. Grid: Chia đúng 3 cột lấp đầy chiều ngang */
+.author-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cột bằng nhau */
+    gap: 30px; /* Khoảng cách giữa các card */
+}
+
+/* 3. Card: Thiết kế đổ bóng nhẹ và bo góc */
+.author-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.author-card:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.author-img-box {
+    height: 220px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.author-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    background: #34495e;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.author-details {
+    padding: 25px;
+    text-align: left; /* Căn trái thông tin giống ảnh mẫu của bạn */
+}
+
+.author-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.author-bio {
+    font-size: 0.9rem;
+    color: #777;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    /* Giới hạn 2 dòng cho sạch sẽ */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.view-works-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.view-works-link:hover {
+    background-color: #f39c12; /* Đổi màu khi hover */
+}
+
+/* Responsive */
+@media (max-width: 992px) { .author-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .author-grid { grid-template-columns: 1fr; } }

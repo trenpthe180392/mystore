@@ -1,152 +1,251 @@
+/* --- 1. BIẾN TOÀN CỤC (Để dễ quản lý màu sắc) --- */
+:root {
+  --primary-blue: #007bff;
+  --hover-blue: #0056b3;
+  --text-dark: #333;
+  --text-gray: #555;
+  --bg-light: #f8f9fa;
+  --border-color: #eee;
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* --- 2. RESET CƠ BẢN --- */
 * {
   padding: 0;
   margin: 0;
-  /* Đảm bảo không có margin */
+  box-sizing: border-box; /* Giúp padding không làm tăng kích thước phần tử */
 }
 
+/* --- 3. BỐ CỤC CHUNG --- */
 .main-header {
   width: 100%;
   background-color: #ffffff;
-  /* Hoặc màu bạn chọn */
-  padding: 10px 0;
-  margin: 0;
-  /* Đảm bảo không có margin */
+  box-shadow: var(--shadow-sm);
+  padding: 15px 0;
+  position: sticky; /* Giữ header dính trên đầu khi cuộn */
+  top: 0;
+  z-index: 1000;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   max-width: 1200px;
   margin: 0 auto;
-
   padding: 0 20px;
 }
 
+/* --- 4. LOGO --- */
 .logo a {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 800;
   text-decoration: none;
-  color: #333;
+  color: var(--text-dark);
 }
 
 .logo span {
-  color: #ff4757;
+  color: var(--primary-blue); /* Dấu chấm hoặc chữ nhấn màu xanh */
 }
 
+/* --- 5. NAVIGATION BAR (MENU CHÍNH) --- */
 .navbar ul {
   display: flex;
   list-style: none;
-  gap: 25px;
+  gap: 30px;
+  align-items: center;
 }
 
-.navbar a,
-.navbar button {
+.navbar a, 
+.dropbtn {
   text-decoration: none;
-  color: #555;
-  font-weight: 500;
-  transition: color 0.3s;
+  color: var(--text-gray);
+  font-weight: 600;
+  font-size: 15px;
+  transition: var(--transition);
+  position: relative;
+  padding: 15px 0;
+  cursor: pointer;
   background: none;
   border: none;
-  cursor: pointer;
-  font-size: inherit;
-  font-family: inherit;
 }
 
-.navbar a:hover,
-.navbar button:hover {
-  color: #ff4757;
+/* Hiệu ứng Hover & Active cho Menu chính */
+.navbar a:hover, 
+.navbar a.active,
+.dropbtn:hover,
+.dropbtn.active {
+  color: var(--primary-blue) !important;
 }
 
-.header-actions {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.cart-icon {
-  position: relative;
-  cursor: pointer;
-}
-
-.cart-count {
+/* Gạch chân dưới khi Active */
+.navbar a.active::after,
+.dropbtn.active::after {
+  content: "";
   position: absolute;
-  top: -10px;
-  right: -10px;
-  background: #ff4757;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-blue);
+  border-radius: 2px;
 }
-.search-btn {
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: var(--primary-color);
-  padding: 8px;
-  border-radius: 50%;
-  transition: all 0.25s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* --- PHẦN DROPDOWN BỔ SUNG --- */
 
-/* 1. Định vị thẻ li chứa dropdown */
+/* --- 6. DROPDOWN (THỂ LOẠI) --- */
 .dropdown {
   position: relative;
-  display: inline-block;
 }
 
-/* 2. Nút bấm/chữ "Thể loại" */
-.dropbtn {
-  cursor: pointer;
-  padding-bottom: 5px; /* Tạo không gian để hover không bị mất */
-}
-
-/* 3. Khung chứa các link con */
 .dropdown-content {
-  display: none;         /* Mặc định ẩn */
-  position: absolute;    /* Nằm đè lên các phần tử khác */
+  display: none;
+  position: absolute;
   background-color: #ffffff;
-  min-width: 180px;      /* Độ rộng menu con */
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho sang */
-  z-index: 100;          /* Đảm bảo luôn nằm trên cùng */
-  border-radius: 4px;    /* Bo góc nhẹ */
-  margin-top: 10px;      /* Cách nút bấm một chút */
-  border: 1px solid #eee;
+  min-width: 200px;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  border-radius: 8px;
+  margin-top: 15px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
 }
 
-/* 4. Các đường link bên trong dropdown */
-.dropdown-content a {
-  color: #555 !important;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;        /* Mỗi link nằm 1 dòng */
-  font-size: 14px;
-  transition: background 0.2s;
+/* Hiệu ứng hiện menu mượt mà */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* 5. Hover vào link con */
-.dropdown-content a:hover {
-  background-color: #f9f9f9;
-  color: #ff4757 !important;
-}
-
-/* 6. QUAN TRỌNG: Hiển thị khi hover vào thẻ cha .dropdown */
+/* 1. Hiển thị menu khi hover vào vùng cha */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* Tạo một "cầu nối" để chuột di chuyển từ nút xuống menu không bị mất hover */
+/* 2. Cấu trúc lại các mục bên trong */
+.dropdown-content a {
+  color: var(--text-gray) !important;
+  padding: 12px 20px;
+  font-size: 14px;
+  display: block;
+  border-bottom: 1px solid #f9f9f9;
+  font-weight: 500;
+  transition: all 0.2s ease; /* Thêm để mượt hơn */
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+/* 3. Hiệu ứng hover cho mục con */
+.dropdown-content a:hover {
+  background-color: var(--bg-light);
+  color: var(--primary-blue) !important;
+  padding-left: 25px; 
+}
+
+.dropdown-content a.active {
+  background-color: #e7f1ff;
+  color: var(--primary-blue) !important;
+}
+
+/* 4. CẦU NỐI HOVER (PHẦN QUAN TRỌNG NHẤT) */
 .dropdown-content::before {
   content: "";
   position: absolute;
-  top: -10px;
+  /* Đẩy lên che lấp hoàn toàn khoảng trống giữa nút và menu */
+  top: -20px; 
   left: 0;
   width: 100%;
-  height: 10px;
+  /* Tăng chiều cao để đảm bảo đè lên một phần của nút cha */
+  height: 25px; 
+  background: transparent;
+  /* Đảm bảo nó luôn nằm trong vùng nhận diện chuột */
+  display: block; 
+}
+
+/* --- 7. SEARCH FORM & ACTIONS --- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 3px 15px;
+  background-color: #f9f9f9;
+  transition: var(--transition);
+}
+
+.search-form:focus-within {
+  border-color: var(--primary-blue);
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.15);
+}
+
+.search-form input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 180px;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  color: var(--primary-blue);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.search-btn:hover {
+  transform: scale(1.1);
+}
+
+/* --- 8. CART & AUTH --- */
+.cart-icon {
+  position: relative;
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: var(--primary-blue);
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 1px solid var(--primary-blue);
+  color: var(--primary-blue);
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.logout-btn:hover {
+  background-color: var(--primary-blue);
+  color: #fff;
 }

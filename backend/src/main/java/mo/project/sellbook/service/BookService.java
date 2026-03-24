@@ -73,4 +73,12 @@ public class BookService {
         // 2. Dùng Mapper chuyển sang DTO
         return bookMapper.toHomeDTOList(books);
     }
+    @Transactional(readOnly = true)
+    public List<BookHomeDTO> getBooksByAuthorId(int authorId) {
+        // 1. Lấy danh sách Entity từ DB
+        List<Books> books = bookRepo.findByAuthors_Id(authorId);
+
+        // 2. Chuyển đổi sang DTO (dùng mapper bạn đã có)
+        return bookMapper.toHomeDTOList(books);
+    }
 }

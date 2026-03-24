@@ -141,3 +141,72 @@
   font-size: 1.2rem;
   color: var(--primary-color);
 }
+/* Container chứa toàn bộ hàng nút phân trang */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+    gap: 8px; /* Khoảng cách giữa các nút */
+}
+
+/* Style chung cho tất cả các nút (Số trang, Trước, Sau) */
+.pagination button {
+    padding: 8px 16px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hiệu ứng khi di chuột qua các nút (không áp dụng cho nút đang active hoặc bị disabled) */
+.pagination button:hover:not(:disabled):not(.active) {
+    background-color: #f8f9fa;
+    border-color: #007bff;
+    color: #007bff;
+    transform: translateY(-2px); /* Nhích nhẹ lên tạo cảm giác nổi */
+}
+
+/* Nút hiển thị trang hiện tại */
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+    cursor: default;
+}
+
+/* Style cho nút "Trước" và "Sau" */
+.pagination button:first-child,
+.pagination button:last-child {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* Trạng thái nút bị vô hiệu hóa (ví dụ: đang ở trang 1 thì nút "Trước" bị mờ) */
+.pagination button:disabled {
+    background-color: #f5f5f5;
+    color: #bbb;
+    border-color: #ddd;
+    cursor: not-allowed;
+    transform: none; /* Không nhảy lên khi hover */
+}
+
+/* Responsive cho điện thoại (nút sẽ nhỏ lại một chút) */
+@media (max-width: 576px) {
+    .pagination button {
+        padding: 6px 12px;
+        font-size: 13px;
+        min-width: 35px;
+    }
+}

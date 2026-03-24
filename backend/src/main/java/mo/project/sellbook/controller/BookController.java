@@ -38,6 +38,11 @@ public class BookController {
     public ResponseEntity<List<BookHomeDTO>> getByCategory(@PathVariable Integer id) {
         return ResponseEntity.ok(bookService.getBooksByCategoryId(id));
     }
+    @GetMapping("/author/{id}")
+    public ResponseEntity<List<BookHomeDTO>> getByAuthor(@PathVariable int id) {
+        List<BookHomeDTO> books = bookService.getBooksByAuthorId(id);
+        return ResponseEntity.ok(books);
+    }
 
 
 }
